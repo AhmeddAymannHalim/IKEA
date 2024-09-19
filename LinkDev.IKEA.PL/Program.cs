@@ -1,3 +1,6 @@
+using LinkDev.IKEA.DAL.Persistance.Data;
+using Microsoft.EntityFrameworkCore;
+
 namespace LinkDev.IKEA.PL
 {
     public class Program
@@ -7,11 +10,15 @@ namespace LinkDev.IKEA.PL
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            #region Configure Services
             builder.Services.AddControllersWithViews();
 
+            
+            #endregion
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
+            #region Configure Kestrel MiddleWares
             if (!app.Environment.IsDevelopment())
             {
                 app.UseExceptionHandler("/Home/Error");
@@ -24,7 +31,8 @@ namespace LinkDev.IKEA.PL
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            app.UseAuthorization(); 
+            #endregion
 
             app.MapControllerRoute(
                 name: "default",
