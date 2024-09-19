@@ -13,7 +13,35 @@ namespace LinkDev.IKEA.PL
             #region Configure Services
             builder.Services.AddControllersWithViews();
 
-            
+            // builder.Services.AddScoped<ApplicationDbContext>();
+            // builder.Services.AddScoped<DbContextOptions<ApplicationDbContext>>(ServerProvider =>
+            // {
+            //     var options = new DbContextOptions<ApplicationDbContext>();
+            // 
+            //     var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
+            // 
+            //     options = optionsBuilder.Options;
+            // 
+            //     return options;
+            // 
+            //     
+            // });
+
+            builder.Services.AddDbContext<ApplicationDbContext>(optionBuilder =>
+            {
+                optionBuilder.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+                //ByDefault Scoped
+                // contextLifetime:ServiceLifetime.Scoped,
+                // optionsLifetime:ServiceLifetime.Scoped,
+                // optionsAction:(optionBuilder) =>
+                // {
+                //     optionBuilder.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+                // }
+                // );
+
+            });
+                
+                
             #endregion
             var app = builder.Build();
 
