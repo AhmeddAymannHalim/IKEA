@@ -1,5 +1,6 @@
 ﻿using LinkDev.IKEA.BLL.Models.Departments;
 using LinkDev.IKEA.BLL.Services.Departments;
+using LinkDev.IKEA.PL.ViewModels.Departments;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LinkDev.IKEA.PL.Controllers
@@ -63,7 +64,7 @@ namespace LinkDev.IKEA.PL.Controllers
                     ModelState.AddModelError(string.Empty, message);
                     return View(departmentDto);
                 }
-                   
+
             }
             catch (Exception ex)
             {
@@ -71,19 +72,14 @@ namespace LinkDev.IKEA.PL.Controllers
                 _logger.LogError(ex, ex.Message);
 
                 //02- Set a Message
-                if (_environment.IsDevelopment())
-                {
-                       message = ex.Message;
-                        return View(departmentDto);
-                }
-                else
-                {
-                    message = "Department is not Created";
-                    return View(nameof(HomeController.Error), message);
-                }
-                    
+                message = _environment.IsDevelopment() ? ex.Message : "Error Can't Create the Department";
+
 
             }
+
+            ModelState.AddModelError(string.Empty, message);
+
+            return View(departmentDto);
 
         }
 
@@ -99,6 +95,73 @@ namespace LinkDev.IKEA.PL.Controllers
                 return NotFound();
 
             return View(department);
+
+        }
+
+
+        [HttpGet]
+        public IActionResult Edit(int? id)
+        {
+            if (id is null) return BadRequest();
+
+            var department = _departmentService.GetDepartmentById(id.Value);
+
+            if (department is null)
+                return NotFound();
+
+            return View(new DepartmentEditViewModel()
+            {
+                Code = department.Code,
+                Name = department.Name,
+                Description = department.Description,
+                CreationDate = department.CreationDate
+            });
+
+        }
+
+        [HttpPost]
+        public IActionResult Edit(DepartmentEditViewModel departmentViewModel)
+        {
+            if (!ModelState.IsValid) // ServerSide-Validation
+                return View(departmentViewModel);
+
+            var message = string.Empty;
+
+            try 
+            {
+                var deprtmentToUpdate = new UpdatedDepartmentDto()
+                {
+                    Id = departmentViewModel.Id,
+                    Code = departmentViewModel.Code,
+                    Name = departmentViewModel.Name,
+                    Description = departmentViewModel.Description,
+                    CreationDate = departmentViewModel.CreationDate
+                };
+
+                var updated = _departmentService.UpdateDepartment(deprtmentToUpdate) > 0;
+
+                if (updated)
+                    return RedirectToAction(nameof(Index));
+
+                message = "Error During Updating An Department Object!";
+            }
+            catch (Exception ex)
+            {
+                //Log
+                _logger.LogError(ex, ex.Message);
+
+
+                //SetMessage
+
+                message = _environment.IsDevelopment() ? ex.Message : "Error During Updating An Department Object!";
+                
+                
+            }
+            ModelState.AddModelError(string.Empty, message);
+
+            return View(departmentViewModel);
+           
+
 
         }
     }
