@@ -10,8 +10,6 @@ namespace LinkDev.IKEA.BLL.Models.Departments
     {
         public int Id { get; set; }
 
-        public bool IsDeleted { get; set; }
-
         public string Name { get; set; } = null!;
 
         public string Code { get; set; } = null!;

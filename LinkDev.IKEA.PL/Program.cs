@@ -15,21 +15,18 @@ namespace LinkDev.IKEA.PL
             #region Configure Services
             builder.Services.AddControllersWithViews();
 
-            // builder.Services.AddScoped<ApplicationDbContext>();
-            // builder.Services.AddScoped<DbContextOptions<ApplicationDbContext>>(ServerProvider =>
-            // {
-            //     
-            //     
-            //     var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
-            // 
-            //     optionsBuilder.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
-            // 
-            // 
+            /// builder.Services.AddScoped<ApplicationDbContext>();
+            /// builder.Services.AddScoped<DbContextOptions<ApplicationDbContext>>(ServerProvider =>
+            /// {
+            ///     
+            ///     
+            ///     var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
+            /// 
+            ///     optionsBuilder.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+              
             //     //var scope = ServerProvider.CreateScope();
-            // 
-            //     //var department = scope.ServiceProvider.GetService<IDepartmentRepository>();
-            //    
-            // 
+            //     //var department = scope.ServiceProvider.GetService<IDepartmentRepository>();   
+              
             //     return optionsBuilder.Options;
             // 
             //     
@@ -39,17 +36,21 @@ namespace LinkDev.IKEA.PL
               {
                   ServerProvider.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
               });
-                //ByDefault Scoped
-                // contextLifetime:ServiceLifetime.Scoped,
-                // optionsLifetime:ServiceLifetime.Scoped,
-                // optionsAction:(optionBuilder) =>
-                // {
-                //     optionBuilder.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
-                // }
-                // );
+            //ByDefault Scoped
+            // contextLifetime:ServiceLifetime.Scoped,
+            // optionsLifetime:ServiceLifetime.Scoped,
+            // optionsAction:(optionBuilder) =>
+            // {
+            //     optionBuilder.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+            // }
+            // );
 
-            
-                
+
+            builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+
+
+
+
                 
             #endregion
             var app = builder.Build();

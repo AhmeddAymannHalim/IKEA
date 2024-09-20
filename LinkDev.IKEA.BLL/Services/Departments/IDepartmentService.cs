@@ -1,5 +1,5 @@
 ﻿using LinkDev.IKEA.BLL.Models.Departments;
-using LinkDev.IKEA.DAL.Models.Department;
+using LinkDev.IKEA.DAL.Entities.Department;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,10 +12,10 @@ namespace LinkDev.IKEA.BLL.Services.Departments
     {
 
         IEnumerable<DepartmentToReturnDto> GetAllDepartments();
-
+      
         DepartmentDetailsToReturnDto? GetDepartmentById(int id);
 
-        int CreateDepartment(CreatedDepartmentDto department);
+        int CreateDepartment(CreatedDepartmentDto departmentDto);
 
         int UpdateDepartment(UpdatedDepartmentDto department);
 
