@@ -1,4 +1,4 @@
-﻿using LinkDev.IKEA.DAL.Models.Department;
+﻿using LinkDev.IKEA.DAL.Entities.Department;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -16,7 +16,7 @@ namespace LinkDev.IKEA.DAL.Persistance.Data.Configurations.DepartmentConfigurati
             builder.Property(D => D.Id).UseIdentityColumn(10, 10);
             builder.Property(D => D.Name).HasColumnType("varchar(50)").IsRequired();
             builder.Property(D => D.Code).HasColumnType("varchar(20)").IsRequired();
-            builder.Property(D => D.CreatedOn).HasDefaultValue(DateTime.UtcNow);
+            builder.Property(D => D.CreatedOn).HasDefaultValue("GETUTCDATE()");
             builder.Property(D => D.LastModifiedOn).HasComputedColumnSql("GETDATE()");
             builder.Property(D => D.CreationDate).HasComputedColumnSql("Convert(date,GETDATE())");
 
