@@ -2,6 +2,7 @@
 using LinkDev.IKEA.BLL.Services.Departments;
 using LinkDev.IKEA.PL.ViewModels.Departments;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Hosting;
 
 namespace LinkDev.IKEA.PL.Controllers
 {
@@ -9,31 +10,36 @@ namespace LinkDev.IKEA.PL.Controllers
     //Composition : DepartmentController has a IDepartmentService 
     public class DepartmentController : Controller
     {
+        #region Services
         private readonly IDepartmentService _departmentService;
         private readonly ILogger<DepartmentController> _logger;
         private readonly IWebHostEnvironment _environment;
 
         public DepartmentController(
-              IDepartmentService departmentService 
+              IDepartmentService departmentService
             , ILogger<DepartmentController> logger,//ASK CLR TO CREATE OBJ FROM INTERFACE IDepartmentService
               IWebHostEnvironment environment)
-             
+
 
         {
             _logger = logger;
             _environment = environment;
             _departmentService = departmentService;
-            
-        }
 
+        }
+        #endregion
+
+        #region Index
         [HttpGet]
         public IActionResult Index()
-        { 
+        {
             var departments = _departmentService.GetAllDepartments();
             return View(departments);
         }
 
+        #endregion
 
+        #region Create
         [HttpGet]
         public IActionResult Create()
         {
@@ -83,6 +89,10 @@ namespace LinkDev.IKEA.PL.Controllers
 
         }
 
+        #endregion
+
+        #region Details
+
         [HttpGet]
         public IActionResult Details(int? id)
         {
@@ -98,7 +108,9 @@ namespace LinkDev.IKEA.PL.Controllers
 
         }
 
+        #endregion
 
+        #region Edit
         [HttpGet]
         public IActionResult Edit(int? id)
         {
@@ -127,7 +139,7 @@ namespace LinkDev.IKEA.PL.Controllers
 
             var message = string.Empty;
 
-            try 
+            try
             {
                 var deprtmentToUpdate = new UpdatedDepartmentDto()
                 {
@@ -154,15 +166,36 @@ namespace LinkDev.IKEA.PL.Controllers
                 //SetMessage
 
                 message = _environment.IsDevelopment() ? ex.Message : "Error During Updating An Department Object!";
-                
-                
+
+
             }
             ModelState.AddModelError(string.Empty, message);
 
             return View(departmentViewModel);
-           
+
 
 
         }
+
+
+        #endregion
+
+        #region Delete
+        [HttpPost]
+        public IActionResult Delete(int id)
+        {
+            var message = string.Empty;
+
+
+
+            var deleted = _departmentService.DeleteDepartment(id);
+
+            if (deleted)
+                return RedirectToAction(nameof(Index));
+
+
+            return View();
+        } 
+        #endregion
     }
 }
