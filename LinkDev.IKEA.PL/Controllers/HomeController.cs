@@ -1,4 +1,5 @@
 using LinkDev.IKEA.PL.ViewModels;
+using LinkDev.IKEA.PL.ViewModels.Common;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
