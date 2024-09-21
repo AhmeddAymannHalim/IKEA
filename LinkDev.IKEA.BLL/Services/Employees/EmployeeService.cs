@@ -1,12 +1,6 @@
 ﻿using LinkDev.IKEA.BLL.Models.Employees;
-using LinkDev.IKEA.DAL.Common.Enums;
 using LinkDev.IKEA.DAL.Entities.Employee;
 using LinkDev.IKEA.DAL.Persistance.Repositories.Employees;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LinkDev.IKEA.BLL.Services.Employees
 {
@@ -24,12 +18,14 @@ namespace LinkDev.IKEA.BLL.Services.Employees
         {
             return _employeeRepository.GetAllAsIQueryable().Select(EmployeeDto => new EmployeeDto
             {
+                Id= EmployeeDto.Id,
                 Name = EmployeeDto.Name,
                 Age = EmployeeDto.Age,
+                Salary = EmployeeDto.Salary,
                 IsActive = EmployeeDto.IsActive,
                 Email = EmployeeDto.Email,
-                Gender = nameof(EmployeeDto.Gender),
-                EmployeeType = nameof(EmployeeDto.EmployeeType),
+                Gender = EmployeeDto.Gender.ToString(),
+                EmployeeType = EmployeeDto.EmployeeType.ToString(),
 
             });
 
