@@ -180,21 +180,52 @@ namespace LinkDev.IKEA.PL.Controllers
 
         #endregion
 
+
+        [HttpGet]
+        public IActionResult Delete(int? id)
+        {
+            if (id is null) return BadRequest();
+
+            var department = _departmentService.GetDepartmentById(id.Value);
+
+            if (department is null)
+                return NotFound();
+
+            return View(department);
+
+
+        }
         #region Delete
         [HttpPost]
         public IActionResult Delete(int id)
         {
             var message = string.Empty;
 
+            try
+            {
+                var deleted = _departmentService.DeleteDepartment(id);
+
+                if (deleted)
+                    return RedirectToAction(nameof(Index));
 
 
-            var deleted = _departmentService.DeleteDepartment(id);
+                message = "an error has occured during deleting the department";
+            }
+            catch (Exception ex)
+            {
+                //Log Exception
+                _logger.LogError(ex, ex.Message);
 
-            if (deleted)
-                return RedirectToAction(nameof(Index));
+                //SetMessage
+                message = _environment.IsDevelopment() ? ex.Message : "an error has occured during deleting the department";
+            }
+
+            //ModelState.AddModelError(string.Empty, message);
+            return RedirectToAction(nameof(Index));
+               
 
 
-            return View();
+           
         } 
         #endregion
     }
