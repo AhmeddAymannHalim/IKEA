@@ -13,7 +13,7 @@ namespace LinkDev.IKEA.BLL.Services.Departments
 
         IEnumerable<DepartmentToReturnDto> GetAllDepartments();
       
-        DepartmentDetailsToReturnDto? GetDepartmentById(int id);
+        DepartmentDetailsDto? GetDepartmentById(int id);
 
         int CreateDepartment(CreatedDepartmentDto departmentDto);
 
