@@ -19,9 +19,9 @@ namespace LinkDev.IKEA.BLL.Services.Departments
             _departmentRepository = departmentRepository;
         }
 
-        public IEnumerable<DepartmentToReturnDto> GetAllDepartments()
+        public IEnumerable<DepartmentDto> GetAllDepartments()
         {
-            var departments = _departmentRepository.GetAllAsIQueryable().Select(department => new DepartmentToReturnDto()
+            var departments = _departmentRepository.GetAllAsIQueryable().Select(department => new DepartmentDto()
             {
                 Id = department.Id,
                 Code = department.Code,
