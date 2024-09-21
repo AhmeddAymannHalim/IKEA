@@ -180,7 +180,7 @@ namespace LinkDev.IKEA.PL.Controllers
 
         #endregion
 
-
+        #region Delete
         [HttpGet]
         public IActionResult Delete(int? id)
         {
@@ -222,11 +222,12 @@ namespace LinkDev.IKEA.PL.Controllers
 
             //ModelState.AddModelError(string.Empty, message);
             return RedirectToAction(nameof(Index));
-               
 
 
-           
-        } 
+
+
+        }  
+        #endregion
         #endregion
     }
 }
