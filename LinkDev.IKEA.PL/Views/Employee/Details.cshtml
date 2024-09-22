@@ -18,7 +18,7 @@
 
             @* Administrator *@
             <li class="nav-item" role="presentation">
-                <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Adminsitrators</button>
+                <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="true">Adminsitrators</button>
             </li>
 
         </ul>
@@ -30,39 +30,60 @@
     <div class="tab-content" id="pills-tabContent">
 
         @* General *@
-        <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
-            <div>
-                <label class="form-label" asp-for="Code"></label>
-                <input asp-for="Code" class="form-control w-100" readonly />
+      
+
+        <div>
+           
+
+            <label class="form-label" asp-for="Name"></label>
+            <input asp-for="Name" class="form-control w-100" readonly />
+
+          
+
+            <label class="form-label" asp-for="Email"></label>
+            <input asp-for="Email" class="form-control w-100" readonly />
+
+          
 
 
-
-                <label class="form-label" asp-for="Name"></label>
-                <input asp-for="Name" class="form-control w-100" readonly />
-
-
-
-
-
-                <label class="form-label" asp-for="Description"></label>
-                <input asp-for="Description" class="form-control w-100" readonly />
-
-
-
-
-                <label class="form-label" asp-for="CreationDate"></label>
-                <input asp-for="CreationDate" type="date" class="form-control w-100" readonly />
-
-
-
-
-
+            <div class="form-group">
+                <label class="form-label" asp-for="Address"></label>
+                <input asp-for="Address" class="form-control w-100"  readonly/>
+                
             </div>
+            
 
 
-        </div>
+            <label class="form-label" asp-for="HiringDate"></label>
+            <input asp-for="HiringDate" type="date" class="form-control w-100" readonly />
 
+          
+
+            <label class="form-label" asp-for="Age"></label>
+            <input asp-for="Age" class="form-control w-100" readonly />
+
+          
+            <label class="form-label" asp-for="Salary"></label>
+            <input asp-for="Salary" class="form-control w-100" readonly />
+
+           
+
+            <label class="form-label" asp-for="PhoneNumber"></label>
+            <input asp-for="PhoneNumber" class="form-control w-100" readonly />
+
+           
+
+           
+
+
+  
+        
+
+
+    </div>
         @* Administrator *@
+       
+
         <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">
 
             <div>
@@ -93,9 +114,6 @@
             </div>
 
         </div>
-
-
-    </div>
     <div class="mt-3">
 
 
