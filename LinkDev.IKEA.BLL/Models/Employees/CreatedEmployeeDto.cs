@@ -19,7 +19,7 @@ namespace LinkDev.IKEA.BLL.Models.Employees
         [Range(22,30)]
         public int? Age { get; set; }
 
-       
+     
         public string Address { get; set; } = null!;
 
         [DataType(DataType.Currency)]
