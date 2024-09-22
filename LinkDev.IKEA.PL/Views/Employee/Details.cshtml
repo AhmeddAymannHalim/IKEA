@@ -73,7 +73,32 @@
 
            
 
-           
+            @* Gender *@
+            <div class="form-group">
+                <label class="control-label" asp-for="Gender"></label><br />
+                @foreach (Gender genderOptions in Enum.GetValues(typeof(Gender)))
+                {
+                    <label class="radio-inline">
+                        <input type="radio" disabled asp-for="Gender" value="@genderOptions" />
+                        @genderOptions
+                    </label>
+                } 
+            </div>
+
+            @* EmployeeType *@
+            <div class="form-group">
+                <label asp-for="EmployeeType" class="control-label"></label>
+                <select asp-for="EmployeeType" disabled  asp-items="Html.GetEnumSelectList<EmployeeType>()" class="form-control">
+                    <option class="fw-bolder" value="" disabled selected>Choose</option>
+
+                </select>
+            </div>
+
+
+            <div class="form-group">
+                <input asp-for="IsActive" class="form-check-input mb-3" disabled />
+                <label class="form-check-label" asp-for="IsActive" readonly ></label>
+            </div>
 
 
   
@@ -81,6 +106,9 @@
 
 
     </div>
+
+
+
         @* Administrator *@
        
 
