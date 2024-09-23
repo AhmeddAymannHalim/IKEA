@@ -47,15 +47,7 @@
                     <td>@Html.DisplayFor(X => employee.Gender)</td>
                     <td>@Html.DisplayFor(X => employee.EmployeeType)</td>
                     
-            <td><a asp-action="Details" asp-route-id="@employee.Id" class="btn btn-warning btn-sm"><i class="fas fa-eye"></i>Details</a></td>
-                    <td><a asp-action="Edit" asp-route-id="@employee.Id" class="btn btn-success btn-sm"><i class="fas fa-edit"></i>Edit</a>
-                        </td>
-                    <td>
-                        <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal">
-                            <i class="fas fa-trash"></i>
-                            Delete
-                        </button>
-                    </td>
+                    <partial name="_ButtonsPartial" model="@employee.Id"></partial>
                 </tr>
 
                 <!-- Modal -->
@@ -87,7 +79,7 @@
 else
 {
     <div class="mx-auto my-5 alert alert-danger">
-        <h3 class="text-danger">There is No Departments Here! ...</h3>
+        <h3 class="text-danger">There is No Employees Here! ...</h3>
     </div>
 }
 
