@@ -31,7 +31,7 @@ namespace LinkDev.IKEA.PL.Controllers
         {
             var Employees = _employeeService.GetAllEmployees();
             return View(Employees);
-        }
+           }
 
         #endregion
 
@@ -172,21 +172,7 @@ namespace LinkDev.IKEA.PL.Controllers
         #endregion
 
         #region Delete
-        [HttpGet]
-        public IActionResult Delete(int? id)
-        {
-            if (id is null) return BadRequest();
-
-            var Employee = _employeeService.GetEmployeeById(id.Value);
-
-            if (Employee is null)
-                return NotFound();
-
-            return View(Employee);
-
-
-        }
-        #region Delete
+     
         [HttpPost]
         public IActionResult Delete(int id)
         {
@@ -198,7 +184,6 @@ namespace LinkDev.IKEA.PL.Controllers
 
                 if (deleted)
                     return RedirectToAction(nameof(Index));
-
 
                 message = "an error has occured during deleting the Employee";
             }
@@ -219,6 +204,6 @@ namespace LinkDev.IKEA.PL.Controllers
 
         }
         #endregion
-        #endregion
+      
     }
 }
