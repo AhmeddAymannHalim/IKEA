@@ -1,4 +1,5 @@
 ﻿using LinkDev.IKEA.BLL.Models.Employees;
+using LinkDev.IKEA.BLL.Services.Departments;
 using LinkDev.IKEA.BLL.Services.Employees;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,16 +11,19 @@ namespace LinkDev.IKEA.PL.Controllers
         private readonly IEmployeeService _employeeService;
         private readonly ILogger<EmployeeController> _logger;
         private readonly IWebHostEnvironment _environment;
+        
 
         public EmployeeController(
               IEmployeeService employeeService
             , ILogger<EmployeeController> logger,//ASK CLR TO CREATE OBJ FROM INTERFACE IEmployeeService
-              IWebHostEnvironment environment)
+              IWebHostEnvironment environment
+              )
 
 
         {
             _logger = logger;
             _environment = environment;
+           
             _employeeService = employeeService;
 
         }
@@ -37,8 +41,10 @@ namespace LinkDev.IKEA.PL.Controllers
 
         #region Create
         [HttpGet]
-        public IActionResult Create()
+        public IActionResult Create([FromServices]IDepartmentService departmentService)
         {
+            
+            ViewData["Deparments"] = departmentService.GetAllDepartments();
             return View();
         }
 
@@ -130,7 +136,8 @@ namespace LinkDev.IKEA.PL.Controllers
                HiringDate = employee.HiringDate,
                IsActive = employee.IsActive,
                PhoneNumber = employee.PhoneNumber,
-               Age = employee.Age
+               Age = employee.Age,
+              
                
            });
 

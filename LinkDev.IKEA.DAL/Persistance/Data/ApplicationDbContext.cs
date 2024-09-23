@@ -1,5 +1,5 @@
-﻿using LinkDev.IKEA.DAL.Entities.Department;
-using LinkDev.IKEA.DAL.Entities.Employee;
+﻿using LinkDev.IKEA.DAL.Entities.DepartmentEntity;
+using LinkDev.IKEA.DAL.Entities.EmployeeEntity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

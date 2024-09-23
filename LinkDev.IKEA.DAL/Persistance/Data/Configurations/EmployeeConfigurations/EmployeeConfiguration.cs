@@ -1,5 +1,5 @@
 ﻿using LinkDev.IKEA.DAL.Common.Enums;
-using LinkDev.IKEA.DAL.Entities.Employee;
+using LinkDev.IKEA.DAL.Entities.EmployeeEntity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
