@@ -1,5 +1,5 @@
 ﻿using LinkDev.IKEA.BLL.Models.Employees;
-using LinkDev.IKEA.DAL.Entities.Employee;
+using LinkDev.IKEA.DAL.Entities.EmployeeEntity;
 using LinkDev.IKEA.DAL.Persistance.Repositories.Employees;
 
 namespace LinkDev.IKEA.BLL.Services.Employees
@@ -28,6 +28,7 @@ namespace LinkDev.IKEA.BLL.Services.Employees
                 Email = EmployeeDto.Email,
                 Gender = EmployeeDto.Gender.ToString(),
                 EmployeeType = EmployeeDto.EmployeeType.ToString(),
+                
 
             }).ToList();
 
@@ -52,6 +53,8 @@ namespace LinkDev.IKEA.BLL.Services.Employees
                 Gender = employee.Gender,
                 EmployeeType = employee.EmployeeType,
                 
+                
+                
             };
 
             return null;
@@ -72,6 +75,7 @@ namespace LinkDev.IKEA.BLL.Services.Employees
                 HiringDate = EmployeeDto.HiringDate,
                 Gender = EmployeeDto.Gender,
                 EmployeeType = EmployeeDto.EmployeeType,
+                DepartmentId = EmployeeDto.DepartmentId,
                 CreatedBy = 1,
                 //CreatedOn = DateTime.UtcNow
                 LastModifiedBy =1,
@@ -98,6 +102,7 @@ namespace LinkDev.IKEA.BLL.Services.Employees
                 HiringDate = EmployeeDto.HiringDate,
                 Gender = EmployeeDto.Gender,
                 EmployeeType = EmployeeDto.EmployeeType,
+                DepartmentId = EmployeeDto.DepartmentId,
                 CreatedBy = 1,
                 //CreatedOn = DateTime.UtcNow
                 LastModifiedBy = 1,

@@ -1,4 +1,5 @@
 ﻿using LinkDev.IKEA.DAL.Common.Enums;
+using LinkDev.IKEA.DAL.Entities.DepartmentEntity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -6,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LinkDev.IKEA.DAL.Entities.Employee
+namespace LinkDev.IKEA.DAL.Entities.EmployeeEntity
 {
     public class Employee : ModelBase
     {
@@ -17,7 +18,7 @@ namespace LinkDev.IKEA.DAL.Entities.Employee
         public int? Age { get; set; }
 
        
-        public string Address { get; set; } = null!;
+        public string? Address { get; set; } 
 
         
         public decimal Salary { get; set; }
@@ -37,5 +38,12 @@ namespace LinkDev.IKEA.DAL.Entities.Employee
         public Gender Gender { get; set; }
 
         public EmployeeType EmployeeType { get; set; }
+
+
+        public int? DepartmentId { get; set; }
+
+        //Navigational Property [One]
+
+        public Department? Department { get; set; }
     }
 }
