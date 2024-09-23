@@ -24,7 +24,7 @@
     <div class="tab-content" id="pills-tabContent">
 
         @* General *@
-        <div class="mx-auto w-75">
+        <div>
             <label class="form-label" asp-for="Code"></label>
             <input asp-for="Code" class="form-control w-100" readonly />
 
@@ -48,9 +48,7 @@
 
             <span asp-validation-for="CreationDate " class="text-danger"></span>
 
-            <input type="submit" value="Create" class="btn btn-outline-success my-2" />
-
-            <a asp-action="Index" class="btn btn-light w-25 my-2">Back To List</a>
+           
         </div>
 
         @* Administrator *@
@@ -86,7 +84,7 @@
         </div>
 
 
-        @if (ViewBag.Title = "Details")
+        @if (ViewBag.Title == "Details")    
         {
 
             <div class="mt-3">

@@ -67,19 +67,26 @@ namespace LinkDev.IKEA.PL.Controllers
                     Description = departmentVW.Description,
                     CreationDate = departmentVW.CreationDate
                 };
-                var result = _departmentService.CreateDepartment(createDepartment);
+                var created = _departmentService.CreateDepartment(createDepartment) > 0;
 
-                if (result > 0)
+                //TempData : is a Property of Type Dictionary Object 
+                //         : Transfering Data Between Two Consuctive Requests
+
+
+                if (created)
+                
                 {
-                    return RedirectToAction(nameof(Index));
+                    TempData["Message"] = "Department is Created Successfully";
+                    
                 }
                 else
                 {
-                    message = "Department is Not Created !!!";
+                    TempData["Message"] = "Department is Not Created ";
                     ModelState.AddModelError(string.Empty, message);
                     return View(departmentVW);
                 }
 
+                return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)
             {
@@ -88,7 +95,8 @@ namespace LinkDev.IKEA.PL.Controllers
 
                 //02- Set a Message
                 message = _environment.IsDevelopment() ? ex.Message : "Error Can't Create the Department";
-
+                TempData["Message"] = message;
+                RedirectToAction(nameof(Index));
 
             }
 
