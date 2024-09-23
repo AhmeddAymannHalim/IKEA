@@ -36,7 +36,7 @@ namespace LinkDev.IKEA.PL
             // });
 
               builder.Services.AddDbContext<ApplicationDbContext>(ServerProvider =>
-              {
+               {
                   ServerProvider.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
               });
             //ByDefault Scoped
