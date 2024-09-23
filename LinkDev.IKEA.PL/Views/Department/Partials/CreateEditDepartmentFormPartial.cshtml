@@ -1,0 +1,37 @@
+﻿@model DepartmentViewModel
+
+<form asp-action="@ViewBag.Action" class="row justify-content-center align-items-center">
+
+    <div asp-validation-summary="ModelOnly"></div>
+
+    <div>
+        <label class="form-label" asp-for="Code"></label>
+        <input asp-for="Code" class="form-control w-100" required placeholder="Enter Code Here..." />
+
+        <span asp-validation-for="Code" class="text-danger"></span>
+
+        <label class="form-label" asp-for="Name"></label>
+        <input asp-for="Name" class="form-control w-100" required placeholder="Enter Name Here..." />
+
+        <span asp-validation-for="Name" class="text-danger"></span>
+
+
+
+        <label class="form-label" asp-for="Description"></label>
+        <input asp-for="Description" class="form-control w-100" required placeholder="Enter Description Here..." />
+
+        <span asp-validation-for="Description" class="text-danger"></span>
+
+
+        <label class="form-label" asp-for="CreationDate"></label>
+        <input asp-for="CreationDate" type="date" class="form-control w-100" required placeholder="Enter CreationDate Here..." />
+
+        <span asp-validation-for="CreationDate " class="text-danger"></span>
+
+        <input type="submit" value="Save" class="btn btn-outline-success my-2" />
+
+        <a asp-action="Index" class="btn btn-light w-25 my-2">Back To List</a>
+    </div>
+
+
+</form>
