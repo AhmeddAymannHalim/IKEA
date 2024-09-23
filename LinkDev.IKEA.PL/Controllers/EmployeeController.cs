@@ -1,6 +1,5 @@
 ﻿using LinkDev.IKEA.BLL.Models.Employees;
 using LinkDev.IKEA.BLL.Services.Employees;
-using LinkDev.IKEA.PL.ViewModels.Employees;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LinkDev.IKEA.PL.Controllers
@@ -108,71 +107,66 @@ namespace LinkDev.IKEA.PL.Controllers
         #endregion
 
         #region Edit
-        //[HttpGet]
-        //public IActionResult Edit(int? id)
-        //{
-        //    if (id is null) return BadRequest();
+       [HttpGet]
+        public IActionResult Edit(int? id)
+       {
+           if (id is null) return BadRequest();
 
-        //    var employee = _employeeService.GetEmployeeById(id.Value);
+           var employee = _employeeService.GetEmployeeById(id.Value);
 
-        //    if (employee is null)
-        //        return NotFound();
+           if (employee is null)
+               return NotFound();
 
-        //    return View(new EmployeeEditViewModel()
-        //    {
-        //        Code = employee.Code,
-        //        Name = employee.Name,
-        //        Description = employee.Description,
-        //        CreationDate = employee.CreationDate
-        //    });
+           return View(new UpdatedEmployeeDto()
+           {
+               Name = employee.Name,
+               CreationDate = employee.CreationDate,
+               EmployeeType = employee.EmployeeType,
+               Salary =employee.Salary,
+               Gender = employee.Gender,
+               Address = employee.Address,
+               Email = employee.Email,
+               HiringDate = employee.HiringDate,
+               IsActive = employee.IsActive,
+               PhoneNumber = employee.PhoneNumber,
+               Age = employee.Age
+               
+           });
 
-        //}
+       }
 
-        //[HttpPost]
-        //public IActionResult Edit(EmployeeEditViewModel employeeViewModel)
-        //{
-        //    if (!ModelState.IsValid) // ServerSide-Validation
-        //        return View(employeeViewModel);
+        [HttpPost]
+        public IActionResult Edit([FromRoute] int id,UpdatedEmployeeDto employee)
+        {
+            if (!ModelState.IsValid) // ServerSide-Validation
+                return View(employee);
 
-        //    var message = string.Empty;
+            var message = string.Empty;
 
-        //    try
-        //    {
-        //        var employeeToUpdate = new UpdatedEmployeeDto()
-        //        {
-        //            Id = employeeViewModel.Id,
-        //            Code = employeeViewModel.Code,
-        //            Name = employeeViewModel.Name,
-        //            Description = employeeViewModel.Description,
-        //            CreationDate = employeeViewModel.CreationDate
-        //        };
+            try
+            {
+              
+                var updated = _employeeService.UpdateEmployee(employee) > 0;
 
-        //        var updated = _employeeService.UpdateEmployee(employeeToUpdate) > 0;
+                if (updated)
+                    return RedirectToAction(nameof(Index));
 
-        //        if (updated)
-        //            return RedirectToAction(nameof(Index));
-
-        //        message = "Error During Updating An Employee Object!";
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        //Log
-        //        _logger.LogError(ex, ex.Message);
-
-
-        //        //SetMessage
-
-        //        message = _environment.IsDevelopment() ? ex.Message : "Error During Updating An Employee Object!";
+                message = "Error During Updating An Employee Object!";
+            }
+            catch (Exception ex)
+            {
+                //Log
+                _logger.LogError(ex, ex.Message);
 
 
-        //    }
-        //    ModelState.AddModelError(string.Empty, message);
+                //SetMessage
 
-        //    return View(employeeViewModel);
+                message = _environment.IsDevelopment() ? ex.Message : "Error During Updating An Employee Object!";
+            }
+            ModelState.AddModelError(string.Empty, message);
 
-
-
-        //}
+            return View(employee);
+        }
 
 
         #endregion
