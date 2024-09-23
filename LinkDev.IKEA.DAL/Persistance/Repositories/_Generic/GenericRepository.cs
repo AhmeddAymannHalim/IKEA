@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace LinkDev.IKEA.DAL.Persistance.Repositories._Generic
 {
-    public class GenericRepository<T> where T :ModelBase
+    public class GenericRepository<T> where T :ModelBase , IGenericRepository<T>
     {
         private protected readonly ApplicationDbContext _dbContext;
 
@@ -28,7 +28,7 @@ namespace LinkDev.IKEA.DAL.Persistance.Repositories._Generic
         }
 
 
-        public IQueryable<T> GetAllAsIQueryable()
+        public IQueryable<T> GetIQueryable()
         {
             return _dbContext.Set<T>();
         }
