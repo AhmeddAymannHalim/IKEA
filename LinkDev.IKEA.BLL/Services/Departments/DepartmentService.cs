@@ -30,6 +30,8 @@ namespace LinkDev.IKEA.BLL.Services.Departments
                 Code = department.Code,
                 Name = department.Name,
                 CreationDate = department.CreationDate
+                
+                
             }).AsNoTracking().ToList();
 
             return departments;
@@ -62,6 +64,7 @@ namespace LinkDev.IKEA.BLL.Services.Departments
         {
             var department = new Department()
             {
+                
                 Code = departmentDto.Code,
                 Name = departmentDto.Name,
                 Description = departmentDto.Description,
