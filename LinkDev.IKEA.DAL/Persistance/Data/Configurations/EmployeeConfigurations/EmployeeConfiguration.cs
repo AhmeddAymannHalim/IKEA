@@ -16,10 +16,9 @@ namespace LinkDev.IKEA.DAL.Persistance.Data.Configurations.EmployeeConfiguration
         {
             builder.Property(E => E.Name).HasColumnType("varchar(50)").IsRequired();
 
-           
 
-            builder.Property(E => E.Address).HasColumnType("varchar(20)").IsRequired(false);
 
+            
             builder.Property(E => E.Salary).HasColumnType("decimal(8,2)");
 
             builder.Property(E => E.Gender)
@@ -33,6 +32,11 @@ namespace LinkDev.IKEA.DAL.Persistance.Data.Configurations.EmployeeConfiguration
                    (Type) => Type.ToString(),
                    (Type) => (EmployeeType) Enum.Parse(typeof(EmployeeType), Type)
                    );
+
+            builder.HasOne(E => E.Department)
+                   .WithMany(D => D.Employees)
+                   .OnDelete(DeleteBehavior.SetNull);
+               
 
             builder.Property(E => E.CreatedOn).HasDefaultValueSql("GETUTCDATE()");
         }

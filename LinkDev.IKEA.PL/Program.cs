@@ -18,6 +18,7 @@ namespace LinkDev.IKEA.PL
             #region Configure Services
             builder.Services.AddControllersWithViews();
 
+            
             /// builder.Services.AddScoped<ApplicationDbContext>();
             /// builder.Services.AddScoped<DbContextOptions<ApplicationDbContext>>(ServerProvider =>
             /// {
@@ -35,9 +36,11 @@ namespace LinkDev.IKEA.PL
             //     
             // });
 
-              builder.Services.AddDbContext<ApplicationDbContext>(ServerProvider =>
+              builder.Services.AddDbContext<ApplicationDbContext>(optionBuilder =>
                {
-                  ServerProvider.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+                   optionBuilder
+                   .UseLazyLoadingProxies()
+                   .UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
               });
             //ByDefault Scoped
             // contextLifetime:ServiceLifetime.Scoped,

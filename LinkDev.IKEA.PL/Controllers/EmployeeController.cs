@@ -23,7 +23,6 @@ namespace LinkDev.IKEA.PL.Controllers
         {
             _logger = logger;
             _environment = environment;
-           
             _employeeService = employeeService;
 
         }
@@ -41,10 +40,8 @@ namespace LinkDev.IKEA.PL.Controllers
 
         #region Create
         [HttpGet]
-        public IActionResult Create([FromServices]IDepartmentService departmentService)
-        {
-            
-            ViewData["Deparments"] = departmentService.GetAllDepartments();
+        public IActionResult Create()
+        {            
             return View();
         }
 

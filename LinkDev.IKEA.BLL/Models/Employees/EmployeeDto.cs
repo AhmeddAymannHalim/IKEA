@@ -1,4 +1,5 @@
 ﻿using LinkDev.IKEA.DAL.Common.Enums;
+using LinkDev.IKEA.DAL.Entities.DepartmentEntity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -36,7 +37,9 @@ namespace LinkDev.IKEA.BLL.Models.Employees
 
         public string Gender { get; set; } = null!;
 
-        public string EmployeeType { get; set; } = null!; 
+        public string EmployeeType { get; set; } = null!;
+
+        public string Department { get; set; } = null!;
         #endregion
 
         #region Administrator
