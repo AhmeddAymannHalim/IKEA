@@ -2,6 +2,7 @@
 using LinkDev.IKEA.DAL.Entities.EmployeeEntity;
 using LinkDev.IKEA.DAL.Persistance.Repositories.Employees;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 namespace LinkDev.IKEA.BLL.Services.Employees
 {
@@ -15,10 +16,10 @@ namespace LinkDev.IKEA.BLL.Services.Employees
         }
 
 
-        public IEnumerable<EmployeeDto> GetAllEmployees()
+        public IEnumerable<EmployeeDto> GetEmployees(string search)
         {
             return _employeeRepository.GetIQueryable()
-                                      .Where(E => !E.IsDeleted)
+                                      .Where(E => !E.IsDeleted && (search.IsNullOrEmpty() || E.Name.ToLower().Contains(search.ToLower())))
                                       .Include(E => E.Department)
                                       .Select(EmployeeDto => new EmployeeDto
             {
