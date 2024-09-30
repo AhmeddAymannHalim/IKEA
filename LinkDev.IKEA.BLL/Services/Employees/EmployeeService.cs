@@ -1,4 +1,5 @@
-﻿using LinkDev.IKEA.BLL.Models.Employees;
+﻿using LinkDev.IKEA.BLL.Common.Services.Attachments;
+using LinkDev.IKEA.BLL.Models.Employees;
 using LinkDev.IKEA.DAL.Entities.EmployeeEntity;
 using LinkDev.IKEA.DAL.Persistance.Repositories.Employees;
 using LinkDev.IKEA.DAL.Persistance.UnitOfWork;
@@ -10,13 +11,16 @@ namespace LinkDev.IKEA.BLL.Services.Employees
     public class EmployeeService : IEmployeeService
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IAttachmentService _attachmentService;
 
         //private readonly IEmployeeRepository _employeeRepository;
 
-        public EmployeeService(IUnitOfWork unitOfWork)//ASK CLR FOR CREATING OBJECT FROM CLASS IMPLEMENT IEmployeeRepository
+        public EmployeeService(IUnitOfWork unitOfWork,
+                               IAttachmentService attachmentService)//ASK CLR FOR CREATING OBJECT FROM CLASS IMPLEMENT IEmployeeRepository
         {
             
             _unitOfWork = unitOfWork;
+            _attachmentService = attachmentService;
         }
 
 
@@ -35,7 +39,8 @@ namespace LinkDev.IKEA.BLL.Services.Employees
                 Email = EmployeeDto.Email,
                 Gender = EmployeeDto.Gender.ToString(),
                 EmployeeType = EmployeeDto.EmployeeType.ToString(),
-                Department = EmployeeDto.Department.Name
+                Department = EmployeeDto.Department.Name,
+               
                  
 
             }).ToList();
@@ -60,6 +65,7 @@ namespace LinkDev.IKEA.BLL.Services.Employees
                 HiringDate = employee.HiringDate,
                 Gender = employee.Gender,
                 EmployeeType = employee.EmployeeType,
+
                
                 
                 
@@ -71,6 +77,8 @@ namespace LinkDev.IKEA.BLL.Services.Employees
 
         public int CreateEmployee(CreatedEmployeeDto EmployeeDto)
         {
+
+            
             var employee = new Employee()
             {
                 Name = EmployeeDto.Name,
@@ -87,9 +95,17 @@ namespace LinkDev.IKEA.BLL.Services.Employees
                 CreatedBy = 1,
                 CreatedOn = DateTime.UtcNow,
                 LastModifiedBy =1,
-                LastModifiedOn = DateTime.UtcNow
+                LastModifiedOn = DateTime.UtcNow,
+               
+                
 
             };
+
+            if(EmployeeDto.Image is not null)
+            {
+                employee.Image = _attachmentService.Upload(EmployeeDto.Image, "Images");
+
+            }
 
              _unitOfWork.EmployeeRepository.Add(employee);
 
