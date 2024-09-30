@@ -3,6 +3,8 @@ using LinkDev.IKEA.BLL.Services.Employees;
 using LinkDev.IKEA.DAL.Persistance.Data;
 using LinkDev.IKEA.DAL.Persistance.Repositories.Departments;
 using LinkDev.IKEA.DAL.Persistance.Repositories.Employees;
+using LinkDev.IKEA.DAL.Persistance.UnitOfWork;
+using LinkDev.IKEA.PL.Mapping;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
@@ -18,6 +20,7 @@ namespace LinkDev.IKEA.PL
             #region Configure Services
             builder.Services.AddControllersWithViews();
 
+            
             /// builder.Services.AddScoped<ApplicationDbContext>();
             /// builder.Services.AddScoped<DbContextOptions<ApplicationDbContext>>(ServerProvider =>
             /// {
@@ -35,9 +38,11 @@ namespace LinkDev.IKEA.PL
             //     
             // });
 
-              builder.Services.AddDbContext<ApplicationDbContext>(ServerProvider =>
+              builder.Services.AddDbContext<ApplicationDbContext>(optionBuilder =>
                {
-                  ServerProvider.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+                   optionBuilder
+                   .UseLazyLoadingProxies()
+                   .UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
               });
             //ByDefault Scoped
             // contextLifetime:ServiceLifetime.Scoped,
@@ -49,15 +54,15 @@ namespace LinkDev.IKEA.PL
             // );
 
 
-            builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
-
+            //builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+            //builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             builder.Services.AddScoped<IDepartmentService, DepartmentService>();
-
-            builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 
             builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 
-                
+            builder.Services.AddAutoMapper(M => M.AddProfile(new MappingProfile()));
+
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             #endregion
             var app = builder.Build();
 

@@ -1,0 +1,117 @@
+﻿@model DepartmentDetailsDto
+<div>
+
+    @* Start - Nav *@
+
+    <div>
+        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+            @* General *@
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">General</button>
+            </li>
+
+            @* Administrator *@
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Adminsitrators</button>
+            </li>
+
+        </ul>
+    </div>
+
+    @* End - Nav *@
+
+
+    <div class="tab-content" id="pills-tabContent">
+
+        @* General *@
+        <div>
+            <label class="form-label" asp-for="Code"></label>
+            <input asp-for="Code" class="form-control w-100" readonly />
+
+            <span asp-validation-for="Code" class="text-danger"></span>
+
+            <label class="form-label" asp-for="Name"></label>
+            <input asp-for="Name" class="form-control w-100" readonly />
+
+            <span asp-validation-for="Name" class="text-danger"></span>
+
+
+
+            <label class="form-label" asp-for="Description"></label>
+            <input asp-for="Description" class="form-control w-100" readonly />
+
+            <span asp-validation-for="Description" class="text-danger"></span>
+
+
+            <label class="form-label" asp-for="CreationDate"></label>
+            <input asp-for="CreationDate" type="date" class="form-control w-100" readonly />
+
+            <span asp-validation-for="CreationDate " class="text-danger"></span>
+
+           
+        </div>
+
+        @* Administrator *@
+        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">
+
+            <div>
+                <label class="form-label" asp-for="CreatedOn"></label>
+                <input asp-for="CreatedOn" class="form-control w-100" readonly />
+
+
+
+                <label class="form-label" asp-for="CreatedBy"></label>
+                <input asp-for="CreatedBy" class="form-control w-100" readonly />
+
+
+
+
+
+                <label class="form-label" asp-for="LastModifiedOn"></label>
+                <input asp-for="LastModifiedOn" class="form-control w-100" readonly />
+
+
+
+
+                <label class="form-label" asp-for="LastModifiedBy"></label>
+                <input asp-for="LastModifiedBy" class="form-control w-100" readonly />
+
+
+
+
+            </div>
+
+        </div>
+
+
+        @if (ViewBag.Title == "Details")    
+        {
+
+            <div class="mt-3">
+
+                <a asp-action="Edit" asp-route-id="@ViewBag.Id" class="btn btn-success ">Edit</a>
+                <a asp-action="Index" class="btn btn-light  my-2">Back To List</a>
+
+            </div>
+        }
+        else
+        {
+            <form asp-action="Delete" asp-route-id="@ViewBag.Id" class="mt-4">
+                <input type="submit" value="Delete" class="btn btn-danger" />
+                <a asp-action="Index" class="btn btn-secondary">Back To List</a>
+
+            </form>
+        }
+
+       
+
+        
+    </div>
+
+   
+    
+
+
+
+</div>
+

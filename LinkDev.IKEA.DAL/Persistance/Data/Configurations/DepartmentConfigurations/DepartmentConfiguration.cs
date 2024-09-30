@@ -1,4 +1,5 @@
-﻿using LinkDev.IKEA.DAL.Entities.Department;
+﻿using LinkDev.IKEA.DAL.Entities.DepartmentEntity;
+using LinkDev.IKEA.DAL.Entities.EmployeeEntity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -19,6 +20,11 @@ namespace LinkDev.IKEA.DAL.Persistance.Data.Configurations.DepartmentConfigurati
              builder.Property(D => D.CreatedOn).HasDefaultValueSql("GETUTCDATE()");
              builder.Property(D => D.LastModifiedOn).HasComputedColumnSql("GETDATE()");
             builder.Property(D => D.CreationDate).HasComputedColumnSql("Convert(date,GETDATE())");
+
+            builder.HasMany(D => D.Employees)
+                   .WithOne(E => E.Department)
+                   .HasForeignKey(E => E.DepartmentId)
+                   .OnDelete(DeleteBehavior.SetNull);
 
 
         }

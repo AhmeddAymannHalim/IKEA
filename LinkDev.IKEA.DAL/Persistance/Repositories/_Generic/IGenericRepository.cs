@@ -1,5 +1,5 @@
 ﻿using LinkDev.IKEA.DAL.Entities;
-using LinkDev.IKEA.DAL.Entities.Department;
+using LinkDev.IKEA.DAL.Entities.DepartmentEntity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,10 +17,10 @@ namespace LinkDev.IKEA.DAL.Persistance.Repositories._Generic
         IQueryable<T> GetIQueryable();
 
 
-        int Add(T entity);
+        void Add(T entity);
 
-        int Update(T entity);
+        void Update(T entity);
 
-        int Delete(T entity);
+        void Delete(T entity);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using LinkDev.IKEA.BLL.Models.Employees;
+using LinkDev.IKEA.BLL.Services.Departments;
 using LinkDev.IKEA.BLL.Services.Employees;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,11 +11,13 @@ namespace LinkDev.IKEA.PL.Controllers
         private readonly IEmployeeService _employeeService;
         private readonly ILogger<EmployeeController> _logger;
         private readonly IWebHostEnvironment _environment;
+        
 
         public EmployeeController(
               IEmployeeService employeeService
             , ILogger<EmployeeController> logger,//ASK CLR TO CREATE OBJ FROM INTERFACE IEmployeeService
-              IWebHostEnvironment environment)
+              IWebHostEnvironment environment
+              )
 
 
         {
@@ -27,9 +30,13 @@ namespace LinkDev.IKEA.PL.Controllers
 
         #region Index
         [HttpGet]
-        public IActionResult Index()
+        public IActionResult Index(string search)
         {
-            var Employees = _employeeService.GetAllEmployees();
+            var Employees = _employeeService.GetEmployees(search);
+
+            if (!string.IsNullOrEmpty(search))
+                return PartialView("./Partials/_EmployeeListPartial", Employees);
+
             return View(Employees);
            }
 
@@ -38,7 +45,7 @@ namespace LinkDev.IKEA.PL.Controllers
         #region Create
         [HttpGet]
         public IActionResult Create()
-        {
+        {            
             return View();
         }
 
@@ -130,7 +137,8 @@ namespace LinkDev.IKEA.PL.Controllers
                HiringDate = employee.HiringDate,
                IsActive = employee.IsActive,
                PhoneNumber = employee.PhoneNumber,
-               Age = employee.Age
+               Age = employee.Age,
+              
                
            });
 
