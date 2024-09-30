@@ -1,3 +1,4 @@
+using LinkDev.IKEA.BLL.Common.Services.Attachments;
 using LinkDev.IKEA.BLL.Services.Departments;
 using LinkDev.IKEA.BLL.Services.Employees;
 using LinkDev.IKEA.DAL.Persistance.Data;
@@ -63,6 +64,8 @@ namespace LinkDev.IKEA.PL
             builder.Services.AddAutoMapper(M => M.AddProfile(new MappingProfile()));
 
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            builder.Services.AddTransient<IAttachmentService,AttachmentService>();
             #endregion
             var app = builder.Build();
 

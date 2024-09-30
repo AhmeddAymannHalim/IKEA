@@ -1,5 +1,6 @@
 ﻿using LinkDev.IKEA.DAL.Common.Enums;
 using LinkDev.IKEA.DAL.Entities.DepartmentEntity;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -40,6 +41,8 @@ namespace LinkDev.IKEA.BLL.Models.Employees
         public string EmployeeType { get; set; } = null!;
 
         public string Department { get; set; } = null!;
+
+        public IFormFile? Image { get; set; }
         #endregion
 
         #region Administrator
