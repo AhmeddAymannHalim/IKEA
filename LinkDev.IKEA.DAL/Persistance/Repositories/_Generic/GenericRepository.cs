@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace LinkDev.IKEA.DAL.Persistance.Repositories._Generic
 {
-    public class GenericRepository<T> where T :ModelBase 
+    public class GenericRepository<T> where T : ModelBase
     {
         private protected readonly ApplicationDbContext _dbContext;
 
@@ -42,23 +42,19 @@ namespace LinkDev.IKEA.DAL.Persistance.Repositories._Generic
             return _dbContext.Set<T>().Find(id);
         }
 
-        public int Add(T entity)
-        {
-            _dbContext.Set<T>().Add(entity);
-            return _dbContext.SaveChanges();
-        }
+        public void Add(T entity)
+                => _dbContext.Set<T>().Add(entity);
 
-        public int Update(T entity)
+
+        public void Update(T entity)
+                => _dbContext.Set<T>().Update(entity);
+
+
+        public void Delete(T entity)
         {
+            entity.IsDeleted = true;
             _dbContext.Set<T>().Update(entity);
-            return _dbContext.SaveChanges();
-        }
 
-        public int Delete(T entity)
-        {
-            _dbContext.Set<T>().Remove(entity);
-            return _dbContext.SaveChanges();
         }
-
     }
 }
