@@ -16,11 +16,17 @@
 <br />
 <br />
 
-<form asp-action="Create" class="row justify-content-center align-items-center">
+<form asp-action="Create" class="row justify-content-center align-items-center" enctype="multipart/form-data">
 
     <div asp-validation-summary="ModelOnly"></div>
 
     <div class="mx-auto w-75">
+
+
+        <label class="form-label" asp-for="Image"></label>
+        <input asp-for="Image" type="file"  class="form-control" />
+        <span asp-validation-for="Image" class="text-danger"></span>
+
         <label class="form-label" asp-for="Name"></label>
         <input asp-for="Name" class="form-control w-100" required placeholder="Enter Name Here..." />
 

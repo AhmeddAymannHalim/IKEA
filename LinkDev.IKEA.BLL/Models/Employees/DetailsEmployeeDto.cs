@@ -1,4 +1,5 @@
 ﻿using LinkDev.IKEA.DAL.Common.Enums;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -62,5 +63,7 @@ namespace LinkDev.IKEA.BLL.Models.Employees
         public int? DepartmentId { get; set; }
 
         public string Department { get; set; } = null!;
+
+        public IFormFile? Image { get; set; }
     }
 }

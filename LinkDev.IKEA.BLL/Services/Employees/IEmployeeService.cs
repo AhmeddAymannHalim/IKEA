@@ -7,7 +7,6 @@ namespace LinkDev.IKEA.BLL.Services.Employees
 
         IEnumerable<EmployeeDto> GetEmployees(string search);
 
-
         DetailsEmployeeDto? GetEmployeeById(int id);
 
         int CreateEmployee(CreatedEmployeeDto EmployeeDto);
