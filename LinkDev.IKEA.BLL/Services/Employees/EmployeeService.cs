@@ -1,7 +1,6 @@
 ﻿using LinkDev.IKEA.BLL.Common.Services.Attachments;
 using LinkDev.IKEA.BLL.Models.Employees;
 using LinkDev.IKEA.DAL.Entities.EmployeeEntity;
-using LinkDev.IKEA.DAL.Persistance.Repositories.Employees;
 using LinkDev.IKEA.DAL.Persistance.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -95,7 +94,7 @@ namespace LinkDev.IKEA.BLL.Services.Employees
                 CreatedBy = 1,
                 CreatedOn = DateTime.UtcNow,
                 LastModifiedBy =1,
-                LastModifiedOn = DateTime.UtcNow,
+                LastModifiedOn = DateTime.UtcNow
                
                 
 
@@ -103,7 +102,7 @@ namespace LinkDev.IKEA.BLL.Services.Employees
 
             if(EmployeeDto.Image is not null)
             {
-                employee.Image = _attachmentService.Upload(EmployeeDto.Image, "Images");
+               employee.Image = _attachmentService.Upload(EmployeeDto.Image, "Images");
 
             }
 
