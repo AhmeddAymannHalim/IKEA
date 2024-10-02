@@ -5,6 +5,12 @@
 
 <h1>Employee Details</h1>
 
+<div class="row justify-content-center align-items-center">
+    <div class="col-md-4">
+        <img src="~/files/images/@Model.Image" class="w-50 rounded-circle" alt="EmployeeImage"/>
+    </div>
+</div>
+
 <div>
 
     @* Start - Nav *@
@@ -33,6 +39,13 @@
       
 
         <div>
+          
+                
+           
+
+            <input asp-for="Image" class="form-control w-100" disabled />
+
+
            
 
             <label class="form-label" asp-for="Name"></label>
