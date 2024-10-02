@@ -2,12 +2,9 @@ using LinkDev.IKEA.BLL.Common.Services.Attachments;
 using LinkDev.IKEA.BLL.Services.Departments;
 using LinkDev.IKEA.BLL.Services.Employees;
 using LinkDev.IKEA.DAL.Persistance.Data;
-using LinkDev.IKEA.DAL.Persistance.Repositories.Departments;
-using LinkDev.IKEA.DAL.Persistance.Repositories.Employees;
 using LinkDev.IKEA.DAL.Persistance.UnitOfWork;
 using LinkDev.IKEA.PL.Mapping;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 
 namespace LinkDev.IKEA.PL
 {
@@ -67,6 +64,7 @@ namespace LinkDev.IKEA.PL
 
             builder.Services.AddTransient<IAttachmentService,AttachmentService>();
             #endregion
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

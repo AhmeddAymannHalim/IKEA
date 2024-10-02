@@ -25,7 +25,7 @@ namespace LinkDev.IKEA.BLL.Common.Services.Attachments
             //var FolderPath = $"D:{Directory.GetCurrentDirectory()}\\wwwroot\\Files\\{folderName}";
 
             //Base Path
-            var folderPath = Path.Combine(Directory.GetCurrentDirectory(), "\\wwwroot\\Files\\", folderName);
+            var folderPath = Path.Combine(Directory.GetCurrentDirectory(),"wwwroot\\files\\",folderName);
 
             if (!Directory.Exists(folderPath))
                 Directory.CreateDirectory(folderPath);

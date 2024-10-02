@@ -64,6 +64,6 @@ namespace LinkDev.IKEA.BLL.Models.Employees
 
         public string Department { get; set; } = null!;
 
-        public IFormFile? Image { get; set; }
+        public string? Image { get; set; }
     }
 }

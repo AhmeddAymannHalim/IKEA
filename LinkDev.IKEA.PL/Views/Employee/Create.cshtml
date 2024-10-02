@@ -1,6 +1,4 @@
-﻿
-
-@model CreatedEmployeeDto
+﻿@model CreatedEmployeeDto
 
 @inject IDepartmentService departmentService
 
@@ -23,9 +21,6 @@
     <div class="mx-auto w-75">
 
 
-        <label class="form-label" asp-for="Image"></label>
-        <input asp-for="Image" type="file"  class="form-control" />
-        <span asp-validation-for="Image" class="text-danger"></span>
 
         <label class="form-label" asp-for="Name"></label>
         <input asp-for="Name" class="form-control w-100" required placeholder="Enter Name Here..." />
@@ -87,6 +82,11 @@
 
             </select>
         </div>
+
+
+        <label class="form-label" asp-for="Image"></label>
+        <input asp-for="Image" class="form-control" />
+        @* <span asp-validation-for="Image" class="text-danger"></span> *@
 
         <div class="form-group">
             <label asp-for="DepartmentId" class="control-label"></label>

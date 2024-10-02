@@ -39,6 +39,7 @@ namespace LinkDev.IKEA.BLL.Services.Employees
                 Gender = EmployeeDto.Gender.ToString(),
                 EmployeeType = EmployeeDto.EmployeeType.ToString(),
                 Department = EmployeeDto.Department.Name,
+                Image = EmployeeDto.Image
                
                  
 
@@ -50,25 +51,26 @@ namespace LinkDev.IKEA.BLL.Services.Employees
         {
             var employee = _unitOfWork.EmployeeRepository.Get(id);
 
-            if(employee is { })
+            if (employee is { })
 
-             return new DetailsEmployeeDto()
-            {
-                Name = employee.Name,
-                Age = employee.Age,
-                Salary = employee.Salary,
-                Address = employee.Address,
-                IsActive = employee.IsActive,
-                Email = employee.Email,
-                PhoneNumber = employee.PhoneNumber,
-                HiringDate = employee.HiringDate,
-                Gender = employee.Gender,
-                EmployeeType = employee.EmployeeType,
+                return new DetailsEmployeeDto()
+                {
+                    Name = employee.Name,
+                    Age = employee.Age,
+                    Salary = employee.Salary,
+                    Address = employee.Address,
+                    IsActive = employee.IsActive,
+                    Email = employee.Email,
+                    PhoneNumber = employee.PhoneNumber,
+                    HiringDate = employee.HiringDate,
+                    Gender = employee.Gender,
+                    EmployeeType = employee.EmployeeType,
+                    Image = employee.Image
+                   
 
-               
-                
-                
-            };
+
+
+                };
 
             return null;
         }
@@ -94,15 +96,15 @@ namespace LinkDev.IKEA.BLL.Services.Employees
                 CreatedBy = 1,
                 CreatedOn = DateTime.UtcNow,
                 LastModifiedBy =1,
-                LastModifiedOn = DateTime.UtcNow
-               
+                LastModifiedOn = DateTime.UtcNow,
                 
+
 
             };
 
             if(EmployeeDto.Image is not null)
             {
-               employee.Image = _attachmentService.Upload(EmployeeDto.Image, "Images");
+               employee.Image = _attachmentService.Upload(EmployeeDto.Image,"images");
 
             }
 
