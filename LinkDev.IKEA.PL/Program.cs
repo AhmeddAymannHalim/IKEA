@@ -1,10 +1,13 @@
 using LinkDev.IKEA.BLL.Common.Services.Attachments;
 using LinkDev.IKEA.BLL.Services.Departments;
 using LinkDev.IKEA.BLL.Services.Employees;
+using LinkDev.IKEA.DAL.Entities.Identity;
 using LinkDev.IKEA.DAL.Persistance.Data;
 using LinkDev.IKEA.DAL.Persistance.UnitOfWork;
 using LinkDev.IKEA.PL.Mapping;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace LinkDev.IKEA.PL
 {
@@ -63,6 +66,34 @@ namespace LinkDev.IKEA.PL
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             builder.Services.AddTransient<IAttachmentService,AttachmentService>();
+
+            //builder.Services.AddScoped<UserManager<ApplicationUser>>();
+            //builder.Services.AddScoped<SignInManager<ApplicationUser>>();
+            //builder.Services.AddScoped<RoleManager<ApplicationUser>>();
+
+            //builder.Services.AddIdentity<ApplicationUser,IdentityRole>();
+            builder.Services.AddIdentity<ApplicationUser, IdentityRole>((options) =>
+            {
+                // options.Password.RequiredLength = 5;
+                options.Password.RequireNonAlphanumeric = false; // Default True  {  #%$  }
+                // options.Password.RequireUppercase = true;
+                // options.Password.RequireLowercase = true;
+                // options.Password.RequireDigit = true;
+                // options.Password.RequiredUniqueChars = 5;
+
+               
+
+
+
+             //  options.User.RequireUniqueEmail = true;
+             //  options.User.AllowedUserNameCharacters = "";
+             //  options.Lockout.AllowedForNewUsers = true;
+             //  options.Lockout.MaxFailedAccessAttempts = 3;
+             //  options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromDays(900);
+            })
+                            .AddEntityFrameworkStores<ApplicationDbContext>();
+                            
+
             #endregion
 
             var app = builder.Build();
