@@ -75,27 +75,25 @@ namespace LinkDev.IKEA.PL
             {
                 // options.Password.RequiredLength = 5;
                 options.Password.RequireNonAlphanumeric = false; // Default True  {  #%$  }
-                                                                 // options.Password.RequireUppercase = true;
-                                                                 // options.Password.RequireLowercase = true;
-                                                                 // options.Password.RequireDigit = true;
-                                                                 // options.Password.RequiredUniqueChars = 5;
+             // options.Password.RequireUppercase = true;
+             // options.Password.RequireLowercase = true;
+             // options.Password.RequireDigit = true;
+             // options.Password.RequiredUniqueChars = 5;
 
-
-
-
-
-                //  options.User.RequireUniqueEmail = true;
-                //  options.User.AllowedUserNameCharacters = "";
-                //  options.Lockout.AllowedForNewUsers = true;
-                //  options.Lockout.MaxFailedAccessAttempts = 3;
-                //  options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromDays(900);
-            })
-                            .AddEntityFrameworkStores<ApplicationDbContext>();
+           //  options.User.RequireUniqueEmail = true;
+           //  options.User.AllowedUserNameCharacters = "";
+           //  options.Lockout.AllowedForNewUsers = true;
+           //  options.Lockout.MaxFailedAccessAttempts = 3;
+           //  options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromDays(900);
+            }).AddEntityFrameworkStores<ApplicationDbContext>();
 
          
             builder.Services.ConfigureApplicationCookie(options =>
             {
                 options.LoginPath = ("/Account/SignIn");
+                
+                options.AccessDeniedPath = ("/Home/Error");
+
             });
                             
             
