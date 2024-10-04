@@ -2,6 +2,7 @@
 using LinkDev.IKEA.BLL.Models.Departments;
 using LinkDev.IKEA.BLL.Services.Departments;
 using LinkDev.IKEA.PL.ViewModels.Departments;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Hosting;
 
@@ -9,6 +10,7 @@ namespace LinkDev.IKEA.PL.Controllers
 {
     //Inheritance : DepartmentController is  a Controller
     //Composition : DepartmentController has a IDepartmentService 
+    [Authorize]
     public class DepartmentController : Controller
     {
         #region Services
